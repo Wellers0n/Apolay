@@ -11,6 +11,7 @@ import schema from "./schema";
 import { getUser } from "./auth";
 // import database from './database';
 import multer from "koa-multer";
+import koaPlayground from 'graphql-playground-middleware-koa';
 
 // init router and koa
 const app = new koa();
@@ -23,8 +24,12 @@ app.use(logger());
 app.use(cors());
 app.use(json());
 app.use(bodyparser());
-app.use(router.routes());
-app.use(router.allowedMethods());
+// app.use(router.routes());
+// app.use(router.allowedMethods());
+
+router.get('/', async ctx => {
+  ctx.body = 'Welcome';
+});
 
 const graphqlSettingsPerReq = async (req: Request, ctx: Response) => {
   const { user } = await getUser(req.header.authorization);
@@ -52,5 +57,16 @@ const limits = {
 };
 
 router.all("/graphql", multer({ storage, limits }).any(), graphqlServer);
+router.all(
+  '/graphiql',
+  koaPlayground({
+    endpoint: '/graphql',
+    subscriptionEndpoint: '/subscriptions',
+    // subscriptionsEndpoint: `ws://localhost:${port}/subscriptions`
+  }),
+);
+
+app.use(router.routes()).use(router.allowedMethods());
+
 
 export default app;
