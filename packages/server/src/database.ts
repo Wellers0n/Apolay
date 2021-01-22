@@ -14,7 +14,7 @@ export default function connectDatabase() {
       {
         useNewUrlParser: true,
         useCreateIndex: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
       }
     );
   });
