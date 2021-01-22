@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Router, Switch } from 'react-router-dom'
 import history from 'helpers/history';
 import GlobalStyle from 'styles/global';
 import { SnackbarProvider } from 'notistack';
-// import PrivateRouter from 'components/PrivateRouter'
 // Pages
 const Home = lazy(() => import('pages/Home' /* webpackChunkName: "Home" */))
 
