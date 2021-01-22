@@ -1,7 +1,8 @@
 import { 
     GraphQLObjectType,
     GraphQLString,
-    GraphQLID
+    GraphQLID,
+    GraphQLBoolean
 } from 'graphql'
 import {globalIdField} from 'graphql-relay'
 
@@ -19,7 +20,10 @@ export default new GraphQLObjectType({
             type: GraphQLString,
         },
         description:{
-            type: GraphQLString
-        },        
+            type: GraphQLString,
+        },
+        done: {
+            type: GraphQLBoolean,
+        }        
     })
 })
