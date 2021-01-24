@@ -1,0 +1,70 @@
+yarn run v1.17.3
+$ /home/wellerson/Projects/Apolay/node_modules/.bin/get-graphql-schema http://localhost:5000/graphql
+schema {
+  query: Query
+  mutation: MutationType
+}
+
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+input CreateItemMutationInput {
+  name: String!
+  description: String!
+  clientMutationId: String
+}
+
+type CreateItemMutationPayload {
+  msg: String
+  clientMutationId: String
+}
+
+type Items {
+  """The ID of an object"""
+  id: ID!
+  _id: ID
+  id_user: ID
+  name: String
+  description: String
+}
+
+input LoginUserMutationInput {
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type LoginUserMutationPayload {
+  token: String
+  error: String
+  clientMutationId: String
+}
+
+type MutationType {
+  LoginUserMutation(input: LoginUserMutationInput!): LoginUserMutationPayload
+  RegisterUserMutation(input: RegisterUserMutationInput!): RegisterUserMutationPayload
+  CreateItemMutation(input: CreateItemMutationInput!): CreateItemMutationPayload
+}
+
+"""The root of all... queries"""
+type Query {
+  item(id: ID!): Items
+  items(skip: Int, limit: Int): [Items]
+}
+
+input RegisterUserMutationInput {
+  name: String!
+  email: String!
+  password: String!
+  clientMutationId: String
+}
+
+type RegisterUserMutationPayload {
+  msg: String
+  clientMutationId: String
+}
+
+Done in 0.14s.
